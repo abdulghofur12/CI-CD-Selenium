@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.ghofur'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.27.0'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.2'
+    testImplementation 'io.cucumber:cucumber-java:7.8.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.8.1'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnit()
+
+}
+
+configurations {
+    cucumberRuntime{
+        extendsFrom testImplementation
+    }
+}
+
+def tags = (findProperty("tags")== null) ? 'not @exclude':findProperty('tags') + 'and not @exclude'
+
+task cucumber(){
+    description ("Running Cucumber Test")
+    dependsOn assemble,compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin','html:reports/test-report.html',
+                    '--plugin', 'pretty',
+                    '--glue', 'ghofur.stepdef',
+                    '--tags',"${tags}",
+                    'src/test/resources'
+            ]
+        }
+    }
+
+}
+
