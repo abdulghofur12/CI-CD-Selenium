@@ -20,8 +20,10 @@ public class LoginStepDef {
 
     @Before
     public void beforeTest(){
+
         driver = WebDriverManager.chromedriver().create();
     }
+
     @After
     public void  AfterTest(){
         driver.close();
