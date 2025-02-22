@@ -2,7 +2,6 @@ package ghofur.stepdef;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import ghofur.stepdef.BaseTest;
 
 public class CucumberHooks extends BaseTest {
 

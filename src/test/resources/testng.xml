@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<suite name="Reqres Automation API">
+    <test name="Test Get dan Post">
+        <classes>
+            <class name="ghofur.stepdef.apiauto.TestReqres"/>
+        </classes>
+    </test>
+</suite>
+

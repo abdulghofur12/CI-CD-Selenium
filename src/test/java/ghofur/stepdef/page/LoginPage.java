@@ -3,6 +3,8 @@ package ghofur.stepdef.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginPage {
@@ -33,7 +35,7 @@ public class LoginPage {
     }
 
     public void validateErrorAppear(String errorMessage){
-        assertTrue(driver.getPageSource().contains(errorMessage));
+        assertTrue(Objects.requireNonNull(driver.getPageSource()).contains(errorMessage));
     }
 
 }
